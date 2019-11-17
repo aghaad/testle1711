@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
+
+{% block body %}
+
+
+    <h1 class="display-3 text-center">{{ title }}</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <section class="billetterie">
+
+
+                    {{ form_start(formBillet) }}
+
+                    <div class="name">
+                        {{ form_row(formBillet.nom) }}
+                        {{ form_row(formBillet.prenom) }}
+                    </div>
+
+                    <div class="calendar">
+                        {{ form_row(formBillet.dateNaissance) }}
+                        <i>Format: YYYY-MM-JJ</i>
+                    </div>
+
+                    <div class="pays">
+                        {{ form_row(formBillet.pays) }}
+                    </div>
+
+                    <div class="reduced_price">
+                        {{ form_row(formBillet.reduction) }}
+                        <i>Pour toutes réductions, il faudra présenter une pièce justificative à l'entrée du musée.</i>
+                    </div>
+
+
+                    {{ form_end(formBillet) }}
+                </section>
+                <br><br><br>
+            </div>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+
+            flatpickr(".js-datepicker", {});
+
+    </script>
+{% endblock %}

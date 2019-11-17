@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <h1 class="display-3 text-center">BILLETTERIE</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+            <div class="card-header">Récapitulatif des billets</div>
+            <div class="card-body">
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Pays</th>
+                    <th>Prix (en €)</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for billet in commande.billets %}
+                    <tr>
+                    <td>{{ billet.nom }}</td>
+                    <td>{{ billet.prenom }}</td>
+                    <td>{{ billet.pays }}</td>
+                    <td>{{ billet.prix }}</td>
+                    </tr>{% endfor %}
+                </tbody>
+            </table>
+            <div class="card-header">Récapitulatif de la commande</div>
+            <div class="card-body">
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>Nombre de billet(s)</th>
+                    <th>Adresse email</th>
+                    <th>Prix Total(en €)</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>{{ commande.NbBillet -1}}</td>
+                    <td>{{ commande.email }}</td>
+                    <td id="total">{{ commande.prixTotal }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <form action="{{ path('success', { 'id': commande.id }) }}" method="POST">
+                <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="pk_test_cWkOARNfUI51IZrJc2bgorRk00uaXJdhlP"
+                        data-amount="{{ commande.prixTotal *100 }}"
+                        data-name="Stripe.com"
+                        data-description="Example charge"
+                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                        data-locale="auto"
+                        data-zip-code="true">
+                </script>
+            </form>
+            <br><br><br>
+        </div>
+
+    </div>
+{% endblock %}
+
+

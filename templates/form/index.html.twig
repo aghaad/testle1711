@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ title }}
+{% endblock %}
+
+{% form_theme formCommande 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+{% endblock %}
+
+{% block body %}
+
+
+    <h1 class="display-3 text-center">{{ title }}</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <section class="billetterie">
+
+
+                    {{ form_start(formCommande) }}
+
+                    <div class="calendar">
+                        {{ form_row(formCommande.DateCommande) }}
+                        <p class="reste text-success">Il reste <span id="Nbbillets"></span> billets pour ce jour.</p>
+                        <p class="bloque text-danger">Désolé, il ne reste plus assez de billets pour ce jour.</p>
+                    </div>
+
+                    <div class="formule">
+                        {{ form_row(formCommande.Formule) }}
+                        <i>La formule Demi-journée vous permet de rentrer dans le musée à partir de 14h.</i>
+                    </div>
+
+                    <ul class="billet"
+                        data-prototype="{{ form_widget(formCommande.billets.vars.prototype)|e('html_attr') }}">
+                        <li>{{ form_row(formCommande.NbBillet) }}</li>
+                    </ul>
+
+                    <div class="email">
+                        {{ form_row(formCommande.email) }}
+                    </div>
+
+
+                    {{ form_end(formCommande) }}
+                </section>
+                <br><br><br>
+            </div>
+
+            <div class="col-4">
+
+            </div>
+        </div>
+    </div>
+
+  <center><img src="{{ asset ('img/bg2.jpg')}}" ></center>
+</div>
+
+    <footer class="blue bg-primary pt-4">
+
+
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3 text-secondary">© 2019 Copyright - AMRANI Aghaad
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+{% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script>
+            var $collectionHolder;
+
+            $("p.bloque").hide();
+            $("p.reste").hide();
+            var pickr = flatpickr(".js-datepicker", {
+                "disable": ["2019-05-01", "2019-11-01","2019-12-25",
+                    function (date,) {
+                        // return true to disable
+                        return (date.getDay() === 2 || date.getDay() === 0);
+                    }
+                ],
+                "locale": {
+                    "firstDayOfWeek": 1 // start week on Monday
+                },
+               // defaultDate: "today",
+                dateFormat: "Y-m-d",
+                defaultTime:"now",
+                minDate: "today",
+                onChange: function (selectedDates, dateStr) {
+                    $.get("/limitCommande/" + dateStr, function (data, status) {
+                        console.log(data, status);
+
+                        if (data.quantity > 3) {
+                            $('#commande_valider').prop('disabled', true);
+                            $("p.bloque").show();
+                            $("p.reste").hide();
+
+                        } else {
+                            $('#commande_valider').prop('disabled', false);
+                            $('#Nbbillets').text(1000 - data.quantity);
+                            $("p.reste").show();
+                            $("p.bloque").hide();
+                        }
+                    })
+                }
+            });
+
+
+            $(document).ready(function () {
+                $('#commande_NbBillet').on('change', function (e) {
+                    e.preventDefault();
+                    $('li.deleteOnChangeForm').remove();
+                    // Get the ul that holds the collection of etapes
+                    $collectionHolder = $('ul.billet');
+
+                    // count the current form inputs we have (e.g. 2), use that as the new
+                    // index when inserting a new item (e.g. 2)
+                    $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+                    var NbBillet = $('#commande_NbBillet').val() - 1;
+                    console.log(NbBillet);
+                    for (var i = 0; i < NbBillet; i++) {
+                        addBilletForm($collectionHolder);
+                    }
+                });
+
+                function addBilletForm($collectionHolder) {
+                    var prototype = $collectionHolder.data('prototype');
+                    var index = $collectionHolder.data('index');
+                    var newForm = prototype;
+                    newForm = newForm.replace(/__name__/g, index);
+                    $collectionHolder.data('index', index + 1);
+                    var $newFormLi = $('<li class="deleteOnChangeForm"></li>').append(newForm);
+                    $('ul.billet').append($newFormLi);
+                };
+
+            });
+        </script>
+    {% endblock %}
+
+
