@@ -1,0 +1,57 @@
+
+composer require stripe/stripe-php
+
+php bin/console cache:clear
+
+php bin/console server:run
+
+composer create-project symfony/skeleton
+
+composer require annotations
+
+composer require mailer
+
+composer install
+
+php bin/console swiftmailer:email:send
+
+
+composer require symfony/swiftmailer-bundle
+
+composer require twig/cssinliner-extension
+
+aghaad@live.fr
+
+composer require "swiftmailer/swiftmailer:^6.0"
+
+composer dump-autoload
+
+composer update
+
+composer install
+
+php bin/console doctrine:migrations:migrate 
+
+php bin/console make:migration
+
+composer require stripe/stripe-php
+
+php bin/console cache:clear
+
+php bin/console server:run
+
+composer create-project symfony/skeleton
+
+composer require annotations
+
+composer require mailer
+
+composer require symfony/yaml
+
+composer require security
+
+composer install --no-dev
+
+composer update
+
+vendor/bin/phpunit
