@@ -46,7 +46,9 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "heroku/heroku-buildpack-php": "*"
+        "heroku/heroku-buildpack-php": "*",
+        "phpunit/phpunit": "4.7.7",
+        "phpspec/phpspec": "2.2.1"
     },
     "scripts": {
         "pre-install-cmd": [
