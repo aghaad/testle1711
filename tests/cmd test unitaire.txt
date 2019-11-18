@@ -1,0 +1,8 @@
+PS C:\wamp64\www\le_musee_du_louvre - test phpunit> vendor/bin/phpunit.bat
+
+Testing Project Test Suite
+....                                                                4 / 4 (100%)
+
+Time: 10.98 seconds, Memory: 44.00 MB
+
+OK (4 tests, 13 assertions)

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    <link rel="icon" href=" http://www.iconarchive.com/download/i83765/iconka/landmarks/paris-louvre.ico" />
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+        <link rel="stylesheet" href="{{  asset('css/style.css') }}">
+         <!-- FontAwesome -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+                  <script src="https://kit.fontawesome.com/6b5e7c5ec0.js" crossorigin="anonymous"></script> <!-- Pour ajouter le kit FontAwesome -->
+    {% endblock %}
+</head>
+<body>
+<div id="burger"><a href="#menu"><span><i class="fas fa-bars"></i></span></a></div> <!--Import icone menu burger -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a href="/"><img src={{ asset ("img/bg4.png")}}> ;</a>&nbsp;
+  
+
+        <ul class="navbar-nav mr-auto" id="menu">
+            <li class="crossBurger" title="croix"><a href="#burger"><span><i class="fas fa-times"></i></span></a></li> <!-- Import croix menu Burger -->
+            <li class="nav-item  active">
+                <a class="nav-link " href="{{ path('home') }}"><i class="fas fa-home">Home </i><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('form') }}">- Billetterie</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link " href={{ path('infos')}} >- Informations pratiques</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link " href={{ path('contact')}} >- Contact</a>
+            </li>
+        </ul>
+
+</nav>
+
+{% block body %}{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+{% endblock %}
+</div>
+</div>
+</div>
+
+</body>
+</html>
