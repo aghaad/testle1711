@@ -1,3 +1,9 @@
 swiftmailer:
-    url: '%env(MAILER_URL)%'
+#    url: '%env(MAILER_URL)%'
+    transport: smtp
+    auth_mode: login
+    port: 465
+    host:  smtp.gmail.com
+    username: le.musee.du.louvre.75@gmail.com
+    password: Joconde.75
     spool: { type: 'memory' }

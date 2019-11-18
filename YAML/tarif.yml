@@ -1,0 +1,13 @@
+---
+items:
+    -age:<4
+    price:0
+    -age:<13
+    price:8
+    -age:<59
+    price:12
+    reduced:10
+    -age:default
+    price:16
+    reduced:10
+       

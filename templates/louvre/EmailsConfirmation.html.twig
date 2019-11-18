@@ -1,0 +1,32 @@
+
+<img src="cid:Logo" width="500" height="79"><br><br>
+
+<h3>Confirmation de votre réservation à la Billetterie du Louvre.</h3>
+
+Bonjour,<br>
+
+Nous vous confirmons les réservations suivantes :<br>
+
+
+{% if app.session %}
+            {% set total = 0 %}
+            <h3> Numéro de réservation: {{recap.NumReservation}}</h3>
+            <h3> Date de votre visite: {{ recap.DateVisite|date("d/m/Y") }}</h3>
+            <h3> Nombre de billet(s): {{ recap.NbBillets }}</h3>
+            <h3>Billets: <br>{% for billet in billets %}
+
+                Nom: {{ billet.Nom }}<br>
+                Prenom: {{ billet.Prenom }}<br>
+                Prix: {{billet.Tarif}} € <br>
+                {% set total = total + billet.Tarif %}
+                <br> 
+                <hr>
+                {% endfor %}
+
+                 Total de la réservation: {{ total }} €<br>
+                </h3>
+                <br>
+                {% endif %}
+
+A bientôt !
+
