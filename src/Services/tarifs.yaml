@@ -1,0 +1,7 @@
+parameters:
+
+                  tarif_bebe: 0
+                  tarif_enfant: 8
+                  tarif_normal: 16
+                  tarif_senior: 12
+                  tarif_reduit: 10

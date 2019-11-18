@@ -1,0 +1,28 @@
+<page>
+    <style type="text/css">
+        .underline{
+            text-decoration: underline;
+        }
+    </style>
+
+    <div id="visiteur" class="content-box">
+        <h1>Musée du louvre</h1>
+        <span class="underline">Visiteur :</span><br/><br/>
+        <span>{{ billet.nom }} {{ billet.prenom }}</span><br/><br/>
+        <span class="underline">Type de billet :</span><br/><br/>
+        <span>{{ commande.formule }}></span><br/><br/>
+        <span class="underline">Date de la visite :</span><br/><br/>
+        <span>{{ commande.commandeDate|date("d/m/Y") }}</span><br/><br/>
+        <span class="underline">Tarif :</span><br/><br/>
+        <span>{{ billet.prix / 100 }}€</span><br/><br/>
+        <span class="underline">Tarif réduit :</span><br/><br/>
+        <span>{% if billet.redution %}<strong style="color:red;">Justificatif nécessaire</strong>
+              {% else %}Non appliquable{% endif %}</span><br/><br/>
+        <span class="underline">Commande :</span><br/><br/>
+        <span>>n°{{ commande.id }}</span>
+    </div>
+    <page_footer>
+        <hr/>
+        <small>Copyright 2019 - Louvre Billetterie</small><br/>
+    </page_footer>
+</page>
